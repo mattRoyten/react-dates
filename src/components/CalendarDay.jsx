@@ -108,8 +108,7 @@ export default class CalendarDay extends React.Component {
       height: daySize - 1,
     };
 
-    // need to account for 'span, end, start for ranges as well'
-    const isSelectedDatetext = modifiers.has('selected') ? 'selected date - ' : '';
+    const isSelectedDateText = (ariaLabel && modifiers.has('selected')) ? 'selected date - ' : '';
 
     return (
       <td className={className} style={daySizeStyles}>
@@ -117,7 +116,7 @@ export default class CalendarDay extends React.Component {
           type="button"
           ref={(ref) => { this.buttonRef = ref; }}
           className="CalendarDay__button"
-          aria-label={isSelectedDatetext + ariaLabel}
+          aria-label={isSelectedDateText + ariaLabel}
           onMouseEnter={(e) => { this.onDayMouseEnter(day, e); }}
           onMouseLeave={(e) => { this.onDayMouseLeave(day, e); }}
           onMouseUp={(e) => { e.currentTarget.blur(); }}
