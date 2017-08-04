@@ -100,140 +100,65 @@ const datesList = [
 
 storiesOf('DayPickerSingleDateController', module)
   .addDecorator(InfoPanelDecorator)
-  .addWithInfo('default', () => (
-    <DayPickerSingleDateControllerWrapper
-      onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
-      onPrevMonthClick={action('DayPickerSingleDateController::onPrevMonthClick')}
-      onNextMonthClick={action('DayPickerSingleDateController::onNextMonthClick')}
-    />
-  ))
-  .addWithInfo('with custom input', () => (
-    <DayPickerSingleDateControllerWrapper
-      onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
-      onPrevMonthClick={action('DayPickerSingleDateController::onPrevMonthClick')}
-      onNextMonthClick={action('DayPickerSingleDateController::onNextMonthClick')}
-      showInput
-    />
-  ))
-  .addWithInfo('non-english locale', () => {
-    moment.locale('zh-cn');
-    return (
-      <DayPickerSingleDateControllerWrapper
-        onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
-        onPrevMonthClick={action('DayPickerSingleDateController::onPrevMonthClick')}
-        onNextMonthClick={action('DayPickerSingleDateController::onNextMonthClick')}
-        monthFormat="YYYY[年]MMMM"
-      />
-    );
-  })
-  .addWithInfo('single month', () => (
-    <DayPickerSingleDateControllerWrapper
-      onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
-      onPrevMonthClick={action('DayPickerSingleDateController::onPrevMonthClick')}
-      onNextMonthClick={action('DayPickerSingleDateController::onNextMonthClick')}
-      numberOfMonths={1}
-    />
-  ))
-  .addWithInfo('3 months', () => (
-    <DayPickerSingleDateControllerWrapper
-      onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
-      onPrevMonthClick={action('DayPickerSingleDateController::onPrevMonthClick')}
-      onNextMonthClick={action('DayPickerSingleDateController::onNextMonthClick')}
-      numberOfMonths={3}
-    />
-  ))
-  .addWithInfo('vertical', () => (
-    <DayPickerSingleDateControllerWrapper
-      onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
-      onPrevMonthClick={action('DayPickerSingleDateController::onPrevMonthClick')}
-      onNextMonthClick={action('DayPickerSingleDateController::onNextMonthClick')}
-      orientation={VERTICAL_ORIENTATION}
-    />
-  ))
-  .addWithInfo('with custom month navigation', () => (
-    <DayPickerSingleDateControllerWrapper
-      onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
-      onPrevMonthClick={action('DayPickerSingleDateController::onPrevMonthClick')}
-      onNextMonthClick={action('DayPickerSingleDateController::onNextMonthClick')}
-      navPrev={<TestPrevIcon />}
-      navNext={<TestNextIcon />}
-    />
-  ))
-  .addWithInfo('with outside days enabled', () => (
-    <DayPickerSingleDateControllerWrapper
-      onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
-      onPrevMonthClick={action('DayPickerSingleDateController::onPrevMonthClick')}
-      onNextMonthClick={action('DayPickerSingleDateController::onNextMonthClick')}
-      numberOfMonths={1}
-      enableOutsideDays
-    />
-  ))
-  .addWithInfo('with month specified on open', () => (
-    <DayPickerSingleDateControllerWrapper
-      onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
-      onPrevMonthClick={action('DayPickerSingleDateController::onPrevMonthClick')}
-      onNextMonthClick={action('DayPickerSingleDateController::onNextMonthClick')}
-      initialVisibleMonth={() => moment().add(10, 'months')}
-    />
-  ))
-  .addWithInfo('allows all days, including past days', () => (
-    <DayPickerSingleDateControllerWrapper
-      onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
-      onPrevMonthClick={action('DayPickerSingleDateController::onPrevMonthClick')}
-      onNextMonthClick={action('DayPickerSingleDateController::onNextMonthClick')}
-      isOutsideRange={() => false}
-    />
-  ))
-  .addWithInfo('allows next two weeks only', () => (
-    <DayPickerSingleDateControllerWrapper
-      onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
-      onPrevMonthClick={action('DayPickerSingleDateController::onPrevMonthClick')}
-      onNextMonthClick={action('DayPickerSingleDateController::onNextMonthClick')}
-      isOutsideRange={day =>
-        !isInclusivelyAfterDay(day, moment()) ||
-        isInclusivelyAfterDay(day, moment().add(2, 'weeks'))
-      }
-    />
-  ))
   .addWithInfo('with some blocked dates', () => (
     <DayPickerSingleDateControllerWrapper
+      date={moment('2017-08-10')}
+      // isOutsideRange={() => false}  // allow all dates
+      // initialVisibleMonth={() => moment().add(10, 'months')}
+      // isDayBlocked={day1 => datesList.some(day2 => isSameDay(day1, day2))}
       onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
       onPrevMonthClick={action('DayPickerSingleDateController::onPrevMonthClick')}
       onNextMonthClick={action('DayPickerSingleDateController::onNextMonthClick')}
-      isDayBlocked={day1 => datesList.some(day2 => isSameDay(day1, day2))}
-    />
-  ))
-  .addWithInfo('with some highlighted dates', () => (
-    <DayPickerSingleDateControllerWrapper
-      onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
-      onPrevMonthClick={action('DayPickerSingleDateController::onPrevMonthClick')}
-      onNextMonthClick={action('DayPickerSingleDateController::onNextMonthClick')}
-      isDayHighlighted={day1 => datesList.some(day2 => isSameDay(day1, day2))}
-    />
-  ))
-  .addWithInfo('blocks fridays', () => (
-    <DayPickerSingleDateControllerWrapper
-      onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
-      onPrevMonthClick={action('DayPickerSingleDateController::onPrevMonthClick')}
-      onNextMonthClick={action('DayPickerSingleDateController::onNextMonthClick')}
-      isDayBlocked={day => moment.weekdays(day.weekday()) === 'Friday'}
-    />
-  ))
-  .addWithInfo('with custom daily details', () => (
-    <DayPickerSingleDateControllerWrapper
-      onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
-      onPrevMonthClick={action('DayPickerSingleDateController::onPrevMonthClick')}
-      onNextMonthClick={action('DayPickerSingleDateController::onNextMonthClick')}
-      renderDay={day => day.format('ddd')}
-    />
-  ))
-  .addWithInfo('with info panel', () => (
-    <DayPickerSingleDateControllerWrapper
-      onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
-      onPrevMonthClick={action('DayPickerSingleDateController::onPrevMonthClick')}
-      onNextMonthClick={action('DayPickerSingleDateController::onNextMonthClick')}
-      renderCalendarInfo={() => (
-        <TestCustomInfoPanel />
-      )}
+      isDayHighlighted={($day) => {
+        const date = moment.weekdays($day.weekday());
+        return date === 'Saturday' || date === 'Sunday';
+      }}
+      numberOfMonths={1}
     />
   ));
+// .addWithInfo('allows next two weeks only', () => (
+//   <DayPickerSingleDateControllerWrapper
+//     onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
+//     onPrevMonthClick={action('DayPickerSingleDateController::onPrevMonthClick')}
+//     onNextMonthClick={action('DayPickerSingleDateController::onNextMonthClick')}
+//     isOutsideRange={day =>
+//       !isInclusivelyAfterDay(day, moment()) ||
+//       isInclusivelyAfterDay(day, moment().add(2, 'weeks'))
+//     }
+//   />
+// ))
+
+// .addWithInfo('with some highlighted dates', () => (
+//   <DayPickerSingleDateControllerWrapper
+//     onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
+//     onPrevMonthClick={action('DayPickerSingleDateController::onPrevMonthClick')}
+//     onNextMonthClick={action('DayPickerSingleDateController::onNextMonthClick')}
+//     isDayHighlighted={day1 => datesList.some(day2 => isSameDay(day1, day2))}
+//   />
+// ))
+// .addWithInfo('blocks fridays', () => (
+//   <DayPickerSingleDateControllerWrapper
+//     onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
+//     onPrevMonthClick={action('DayPickerSingleDateController::onPrevMonthClick')}
+//     onNextMonthClick={action('DayPickerSingleDateController::onNextMonthClick')}
+//     isDayBlocked={day => moment.weekdays(day.weekday()) === 'Friday'}
+//   />
+// ))
+// .addWithInfo('with custom daily details', () => (
+//   <DayPickerSingleDateControllerWrapper
+//     onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
+//     onPrevMonthClick={action('DayPickerSingleDateController::onPrevMonthClick')}
+//     onNextMonthClick={action('DayPickerSingleDateController::onNextMonthClick')}
+//     renderDay={day => day.format('ddd')}
+//   />
+// ))
+// .addWithInfo('with info panel', () => (
+//   <DayPickerSingleDateControllerWrapper
+//     onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
+//     onPrevMonthClick={action('DayPickerSingleDateController::onPrevMonthClick')}
+//     onNextMonthClick={action('DayPickerSingleDateController::onNextMonthClick')}
+//     renderCalendarInfo={() => (
+//       <TestCustomInfoPanel />
+//     )}
+//   />
+// ));
