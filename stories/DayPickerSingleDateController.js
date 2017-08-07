@@ -102,11 +102,15 @@ storiesOf('DayPickerSingleDateController', module)
   .addDecorator(InfoPanelDecorator)
   .addWithInfo('with some blocked dates', () => (
     <DayPickerSingleDateControllerWrapper
-      date={moment('2017-08-10')}
+
+      date={moment().add(7)} // this is the current date!
       // isOutsideRange={() => false}  // allow all dates
       // initialVisibleMonth={() => moment().add(10, 'months')}
-      // isDayBlocked={day1 => datesList.some(day2 => isSameDay(day1, day2))}
-      onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
+      isDayBlocked={day => moment(day).format('YYYY-MM-DD') === '2017-08-10'}
+      onOutsideClick={() => {
+        // eslint-disable-next-line no-debugger;
+        console.log('hi i clicked');
+      }}
       onPrevMonthClick={action('DayPickerSingleDateController::onPrevMonthClick')}
       onNextMonthClick={action('DayPickerSingleDateController::onNextMonthClick')}
       isDayHighlighted={($day) => {

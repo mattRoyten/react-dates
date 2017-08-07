@@ -6,6 +6,8 @@ import moment from 'moment';
 import values from 'object.values';
 import isTouchDevice from 'is-touch-device';
 
+import OutsideClickHandler from './OutsideClickHandler';
+
 import { DayPickerPhrases } from '../defaultPhrases';
 import getPhrasePropTypes from '../utils/getPhrasePropTypes';
 
@@ -548,39 +550,44 @@ export default class DayPickerSingleDateController extends React.Component {
       isFocused,
       isRTL,
       phrases,
+      onOutsideClick,
     } = this.props;
 
     const { currentMonth, visibleDays } = this.state;
 
     return (
-      <DayPicker
-        orientation={orientation}
-        enableOutsideDays={enableOutsideDays}
-        modifiers={visibleDays}
-        numberOfMonths={numberOfMonths}
-        onDayClick={this.onDayClick}
-        onDayMouseEnter={this.onDayMouseEnter}
-        onDayMouseLeave={this.onDayMouseLeave}
-        onPrevMonthClick={this.onPrevMonthClick}
-        onNextMonthClick={this.onNextMonthClick}
-        monthFormat={monthFormat}
-        withPortal={withPortal}
-        hidden={!focused}
-        hideKeyboardShortcutsPanel={hideKeyboardShortcutsPanel}
-        initialVisibleMonth={() => currentMonth}
-        firstDayOfWeek={firstDayOfWeek}
-        navPrev={navPrev}
-        navNext={navNext}
-        renderMonth={renderMonth}
-        renderDay={renderDay}
-        renderCalendarInfo={renderCalendarInfo}
-        isFocused={isFocused}
-        getFirstFocusableDay={this.getFirstFocusableDay}
-        onBlur={this.onDayPickerBlur}
-        phrases={phrases}
-        daySize={daySize}
-        isRTL={isRTL}
-      />
+      <OutsideClickHandler
+        onOutsideClick={onOutsideClick}
+      >
+        <DayPicker
+          orientation={orientation}
+          enableOutsideDays={enableOutsideDays}
+          modifiers={visibleDays}
+          numberOfMonths={numberOfMonths}
+          onDayClick={this.onDayClick}
+          onDayMouseEnter={this.onDayMouseEnter}
+          onDayMouseLeave={this.onDayMouseLeave}
+          onPrevMonthClick={this.onPrevMonthClick}
+          onNextMonthClick={this.onNextMonthClick}
+          monthFormat={monthFormat}
+          withPortal={withPortal}
+          hidden={!focused}
+          hideKeyboardShortcutsPanel={hideKeyboardShortcutsPanel}
+          initialVisibleMonth={() => currentMonth}
+          firstDayOfWeek={firstDayOfWeek}
+          navPrev={navPrev}
+          navNext={navNext}
+          renderMonth={renderMonth}
+          renderDay={renderDay}
+          renderCalendarInfo={renderCalendarInfo}
+          isFocused={isFocused}
+          getFirstFocusableDay={this.getFirstFocusableDay}
+          onBlur={this.onDayPickerBlur}
+          phrases={phrases}
+          daySize={daySize}
+          isRTL={isRTL}
+        />
+      </OutsideClickHandler>
     );
   }
 }
