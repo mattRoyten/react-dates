@@ -40,29 +40,22 @@ describe('CalendarDay', () => {
     describe('aria-label text', () => {
       it('set aria-label to chooseAvailableDate callback value when modifiers has value of "selected"', () => {
         const firstOfMonth = moment().startOf('month');
-        const wrapper = shallow(
-          <CalendarDay
-            day={firstOfMonth}
-            modifiers={new Set(['selected'])}
-            phrases={{
-              chooseAvailableDate: (mod) => 'selected date'
-            }}
-          />
-        );
+        const wrapper = shallow(<CalendarDay
+          day={firstOfMonth}
+          modifiers={new Set(['selected'])}
+          phrases={{
+            chooseAvailableDate: () => 'selected date',
+          }}
+        />);
         expect(wrapper.find('button').props()['aria-label']).to.equal('selected date');
       });
 
       it('sets date', () => {
         const day = moment().startOf('month');
-        const wrapper = shallow(
-          <CalendarDay
-            day={day}
-          />
-        );
+        const wrapper = shallow(<CalendarDay day={day} />);
         expect(wrapper.find('button').props()['aria-label']).to.equal(`${day.format('dddd')}, ${day.format('LL')}`);
       });
     });
-
 
     describe('button', () => {
       it('contains a button', () => {
