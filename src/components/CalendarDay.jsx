@@ -95,7 +95,7 @@ export default class CalendarDay extends React.Component {
 
     const formattedDate = `${day.format('dddd')}, ${day.format('LL')}`;
 
-    let ariaLabel = getPhrase(chooseAvailableDate, {
+    let ariaLabel = getPhrase(chooseAvailableDate(modifiers), {
       date: formattedDate,
     });
 
