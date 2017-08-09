@@ -29,7 +29,7 @@ const chooseAvailableStartDate = ({ date }) => `Choose ${date} as your check-in 
 
 // eslint-disable-next-line camelcase
 const chooseAvailableEndDate = ({ date }) => `Choose ${date} as your check-out date. It's available.`;
-const chooseAvailableDate = (modifiers = new Set({})) => ({ date }) => ((modifiers.has('selected')) ? `${date} selected` : date);
+const chooseAvailableDate = (modifiers = new Set({})) => ({ date }) => (modifiers.has('selected') ? `${date} selected` : date);
 const dateIsUnavailable = ({ date }) => `Not available. ${date}`;
 
 export default {
